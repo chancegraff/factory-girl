@@ -2419,7 +2419,7 @@ function isnan (val) {
         testRange(options.min < 0, "Chance: Min cannot be less than zero.");
         return this.integer(options);
     };
-	
+
 	/**
      *  Return a random hex number as string
      *
@@ -3250,7 +3250,7 @@ function isnan (val) {
      *
      * * Make color uppercase
      * chance.color({casing: 'upper'})  => '#29CFA7'
-	 
+
 	 * * Min Max values for RGBA
 	 * var light_red = chance.color({format: 'hex', min_red: 200, max_red: 255, max_green: 0, max_blue: 0, min_alpha: .2, max_alpha: .3});
      *
@@ -3263,7 +3263,7 @@ function isnan (val) {
 			n = n + '';
 			return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 		}
-		
+
         function gray(value, delimiter) {
             return [value, value, value].join(delimiter || '');
         }
@@ -3278,7 +3278,7 @@ function isnan (val) {
         function hex(start, end, withHash) {
             var symbol = (withHash) ? "#" : "";
 			var hexstring = "";
-			
+
 			if (isGrayscale) {
 				hexstring = gray(pad(this.hex({min: min_rgb, max: max_rgb}), 2));
 				if (options.format === "shorthex") {
@@ -3297,29 +3297,29 @@ function isnan (val) {
 					hexstring = pad(this.hex({min: min_rgb, max: max_rgb}), 2) + pad(this.hex({min: min_rgb, max: max_rgb}), 2) + pad(this.hex({min: min_rgb, max: max_rgb}), 2);
 				}
 			}
-			
+
             return symbol + hexstring;
         }
 
         options = initOptions(options, {
             format: this.pick(['hex', 'shorthex', 'rgb', 'rgba', '0x', 'name']),
             grayscale: false,
-            casing: 'lower', 
-			min: 0, 
-			max: 255, 
+            casing: 'lower',
+			min: 0,
+			max: 255,
 			min_red: undefined,
-			max_red: undefined, 
+			max_red: undefined,
 			min_green: undefined,
-			max_green: undefined, 
-			min_blue: undefined, 
-			max_blue: undefined, 
+			max_green: undefined,
+			min_blue: undefined,
+			max_blue: undefined,
 			min_alpha: 0,
 			max_alpha: 1
         });
 
         var isGrayscale = options.grayscale;
 		var min_rgb = options.min;
-		var max_rgb = options.max;		
+		var max_rgb = options.max;
 		var min_red = options.min_red;
 		var max_red = options.max_red;
 		var min_green = options.min_green;
@@ -3336,7 +3336,7 @@ function isnan (val) {
 		if (options.max_blue === undefined) { max_blue = max_rgb; }
 		if (options.min_alpha === undefined) { min_alpha = 0; }
 		if (options.max_alpha === undefined) { max_alpha = 1; }
-		if (isGrayscale && min_rgb === 0 && max_rgb === 255 && min_red !== undefined && max_red !== undefined) {			
+		if (isGrayscale && min_rgb === 0 && max_rgb === 255 && min_red !== undefined && max_red !== undefined) {
 			min_rgb = ((min_red + min_green + min_blue) / 3);
 			max_rgb = ((max_red + max_green + max_blue) / 3);
 		}
@@ -3601,7 +3601,7 @@ function isnan (val) {
                        '01' + this.pick(['0', '1', '2', '3', '4', '5', '6', '7', '8']) + self.string({ pool: '0123456789', length: 7}),
                        '02' + this.pick(['1', '2', '3', '4', '7', '8']) + self.string({ pool: '0123456789', length: 7}),
                        '03' + this.pick(['1', '2', '3', '5', '6', '9']) + self.string({ pool: '0123456789', length: 7}),
-                       '04' + this.pick(['1', '2', '3', '4', '5','6','7', '8','9']) + self.string({ pool: '0123456789', length: 7}),   
+                       '04' + this.pick(['1', '2', '3', '4', '5','6','7', '8','9']) + self.string({ pool: '0123456789', length: 7}),
                        '05' + this.pick(['1', '3', '4', '6', '7', '8']) + self.string({ pool: '0123456789', length: 7}),
                     ]);
                     phone = options.formatted || numPick;
@@ -3612,11 +3612,11 @@ function isnan (val) {
                         '06'  + self.string({ pool: '0123456789', length: 7}),
                         '071' + this.pick(['0','1','2','3','4','5','6','7','8','9']) + self.string({ pool: '0123456789', length: 6}),
                         '07'  + this.pick(['2','3','4','6','7','8','9']) + self.string({ pool: '0123456789', length: 7}),
-                        '08'  + this.pick(['0','1','2','3','4','5']) + self.string({ pool: '0123456789', length: 7}),                     
+                        '08'  + this.pick(['0','1','2','3','4','5']) + self.string({ pool: '0123456789', length: 7}),
                     ]);
                     phone = options.formatted || numPick;
                 }
-                
+
                 break;
 
             case 'us':
@@ -4050,16 +4050,16 @@ function isnan (val) {
     };
 
     /**
-     * Generate a string matching IBAN pattern (https://en.wikipedia.org/wiki/International_Bank_Account_Number). 
+     * Generate a string matching IBAN pattern (https://en.wikipedia.org/wiki/International_Bank_Account_Number).
      * No country-specific formats support (yet)
      */
     Chance.prototype.iban = function () {
         var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         var alphanum = alpha + '0123456789';
-        var iban = 
-            this.string({ length: 2, pool: alpha }) + 
-            this.pad(this.integer({ min: 0, max: 99 }), 2) + 
-            this.string({ length: 4, pool: alphanum }) + 
+        var iban =
+            this.string({ length: 2, pool: alpha }) +
+            this.pad(this.integer({ min: 0, max: 99 }), 2) +
+            this.string({ length: 4, pool: alphanum }) +
             this.pad(this.natural(), this.natural({ min: 6, max: 26 }));
         return iban;
     };
@@ -8234,7 +8234,7 @@ $export.P = 8;   // proto
 $export.B = 16;  // bind
 $export.W = 32;  // wrap
 $export.U = 64;  // safe
-$export.R = 128; // real proto method for `library` 
+$export.R = 128; // real proto method for `library`
 module.exports = $export;
 },{"./_core":51,"./_ctx":52,"./_global":61,"./_hide":63}],59:[function(require,module,exports){
 module.exports = function(exec){
@@ -11989,8 +11989,8 @@ var ReduxORMAdapter = function (_DefaultAdapter) {
 
   (0, _createClass3.default)(ReduxORMAdapter, [{
     key: 'build',
-    value: function build(modelName, props) {
-      return this.session[modelName].create(props);
+    value: function build(model, props) {
+      return this.session[model.modelName].create(props);
     }
   }, {
     key: 'get',

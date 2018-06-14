@@ -1315,8 +1315,8 @@ var ReduxORMAdapter = function (_DefaultAdapter) {
 
   _createClass(ReduxORMAdapter, [{
     key: 'build',
-    value: function build(modelName, props) {
-      return this.session[modelName].create(props);
+    value: function build(model, props) {
+      return this.session[model.modelName].create(props);
     }
   }, {
     key: 'get',
